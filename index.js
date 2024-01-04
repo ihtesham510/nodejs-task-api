@@ -4,9 +4,11 @@ import mongoose from "mongoose";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
-const uri =
-  "mongodb+srv://ihtesham510:Kissanime.me@cluster0.ltdixlk.mongodb.net/";
+const uri = process.env.MONGO_URI;
 connect(uri);
+const db = mongoose.connection;
+db.once("open", () => console.log("connected to the database"));
+db.on("error", () => console.log("error connecting to the database"));
 
 app.all("/", (req, res) => {
   console.log("Just got a request!");
@@ -19,6 +21,9 @@ app.get("/ip", function (req, res) {
 });
 
 async function connect(uri) {
-  await mongoose.connect(uri);
+  await mongoose.connect(uri, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
   app.listen(port, console.log(`App is running on PORT : ${port}`));
 }
