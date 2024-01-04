@@ -19,6 +19,6 @@ app.get("/ip", function (req, res) {
 });
 
 async function connect(uri) {
-  // await mongoose.connect(uri);
+  await mongoose.connect(uri);
   app.listen(port, console.log(`App is running on PORT : ${port}`));
 }
