@@ -13,6 +13,11 @@ app.all("/", (req, res) => {
   res.send("Yo!");
 });
 
+app.get("/ip", function (req, res) {
+  const ipAddress = req.socket.remoteAddress;
+  res.send(ipAddress);
+});
+
 async function connect(uri) {
   await mongoose.connect(uri);
   app.listen(port, console.log(`App is running on PORT : ${port}`));
