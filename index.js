@@ -22,6 +22,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
+app.set("json spaces", 2);
 
 // Create a new task
 app.post("/tasks", async (req, res) => {
